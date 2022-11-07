@@ -1,0 +1,28 @@
+
+
+.modal-user-container {
+
+    .modal-header {
+        button {
+            outline: none;
+            border: none;
+            color: white;
+            background-color: #0071ba;
+            font-size: 20px;
+        }
+    }
+
+    .modal-body {
+
+        .input-container {
+            padding: 7px;
+           input {
+               padding: 5px;
+               outline: none;
+               display: block;
+               width: 100%;
+           }
+        }
+    }
+
+}
