@@ -1,5 +1,4 @@
 import axios from 'axios';
-import _ from 'lodash';
 
 
 const instance = axios.create({
@@ -13,7 +12,7 @@ const instance = axios.create({
 instance.interceptors.response.use(
     (response) => {
        
-        const { data } = response;
+        // const { data } = response;
         return response.data;
     }
        
