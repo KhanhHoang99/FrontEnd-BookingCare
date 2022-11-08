@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {emitter} from "../../utils/emitter";
 
 class ModalUser extends Component {
 
@@ -14,6 +15,20 @@ class ModalUser extends Component {
            address: '',
 
         }
+
+        this.listenToEmitter()
+    }
+
+    listenToEmitter() {
+        emitter.on('EVEN_CLEAR_MODAL_DATA', ()=> {
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                address: '',
+            })
+        });
     }
 
     componentDidMount() {
@@ -53,17 +68,6 @@ class ModalUser extends Component {
         if(isValid){
             this.props.createNewUser(this.state);
         }
-
-        let arrInput = ['email', 'password', 'firstName', 'lastName', 'address'];
-        const copyState = {...this.state};
-
-        for(let i = 0; i < arrInput.length; i++) {
-            copyState[arrInput[i]] = '';
-        }
-        
-        this.setState({
-            ...copyState
-        })
 
         this.toggle();
     }

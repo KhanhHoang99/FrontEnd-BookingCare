@@ -3,6 +3,7 @@ import userService from '../../services/userService';
 import { connect } from 'react-redux';
 import ModalUser from './ModalUser';
 import './UserManage.scss';
+import {emitter} from '../../utils/emitter';
 
 class UserManage extends Component {
 
@@ -42,8 +43,24 @@ class UserManage extends Component {
                 alert(res.message)
             }else{
                 this.getAllUsersFromReact();
+                emitter.emit('EVEN_CLEAR_MODAL_DATA');
             }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    handleDeleteUser = async (user) => {
+        try {
             
+            let res = await userService.deleteUserService(user.id);
+
+            if(res && res.errCode !== 0){
+                alert(res.errMessage)
+            }else{
+                this.getAllUsersFromReact();
+            }
+
         } catch (error) {
             console.log(error)
         }
@@ -93,7 +110,11 @@ class UserManage extends Component {
                                                 <button type="button" className='btn btn-primary px-4 mx-1 mb-1'>
                                                     <i className="fas fa-pencil-alt"></i>
                                                 </button>
-                                                <button type="button" className='btn btn-danger px-4 mx-1 mb-1'>
+                                                <button 
+                                                    type="button" 
+                                                    className='btn btn-danger px-4 mx-1 mb-1'
+                                                    onClick={() => this.handleDeleteUser(user)}
+                                                >
                                                     <i className="fas fa-trash"></i>
                                                 </button>
                                             </td>
