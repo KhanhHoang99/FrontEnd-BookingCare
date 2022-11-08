@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import userService from '../../services/userService';
 import { connect } from 'react-redux';
 import ModalUser from './ModalUser';
+import ModalEditUser from './ModalEditUser';
 import './UserManage.scss';
 import {emitter} from '../../utils/emitter';
 
@@ -12,6 +13,8 @@ class UserManage extends Component {
         this.state = {
             arrUsers: [],
             isOpenModalUser: false,
+            isOpenModalEditUser: false,
+            userEdit: {},
         }
     }
 
@@ -65,6 +68,28 @@ class UserManage extends Component {
             console.log(error)
         }
     }
+    
+    toggleUserModalEdit = () => {
+        this.setState({
+            isOpenModalEditUser: !this.state.isOpenModalEditUser
+        });
+    }
+
+    handleEditUser = (user) => {
+        this.setState({isOpenModalEditUser: true});
+        this.setState({userEdit: user});
+    }
+
+    doEditUser = async (user) => {
+
+        let res = await userService.editUserService(user);
+
+        if(res && res.errCode !== 0){
+            alert(res.message)
+        }else{
+            this.getAllUsersFromReact();
+        }
+    }
 
     
     render() {
@@ -74,6 +99,12 @@ class UserManage extends Component {
                     isOpen={this.state.isOpenModalUser}
                     togleFromParent={this.toggleUserModal}
                     createNewUser={this.createNewUser}
+                />
+                <ModalEditUser
+                    isOpen={this.state.isOpenModalEditUser}
+                    togleFromParent={this.toggleUserModalEdit}
+                    userEdit={this.state.userEdit}
+                    doEditUser={this.doEditUser}
                 />
                 <div className="text-center">Manage users khanhhhh</div>
                 <div className='mx-1'>
@@ -107,7 +138,11 @@ class UserManage extends Component {
                                             <td>{user.lastName}</td>
                                             <td style={{textTransform: "capitalize"}}>{user.address}</td>
                                             <td>
-                                                <button type="button" className='btn btn-primary px-4 mx-1 mb-1'>
+                                                <button 
+                                                    type="button" 
+                                                    className='btn btn-primary px-4 mx-1 mb-1'
+                                                    onClick={() => this.handleEditUser(user)}
+                                                >
                                                     <i className="fas fa-pencil-alt"></i>
                                                 </button>
                                                 <button 

@@ -16,4 +16,8 @@ const deleteUserService = (userId) => {
     return axios.delete(`/api/delete-user?id=${userId}`)
 }
 
-export default {handleLoginAPI, getAllUsers, createNewUser, deleteUserService}
+const editUserService = (user) => {
+    return axios.put('/api/edit-user', user)
+}
+
+export default {handleLoginAPI, getAllUsers, createNewUser, deleteUserService, editUserService}
