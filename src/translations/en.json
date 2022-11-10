@@ -12,6 +12,17 @@
 
     },
 
+    "banner": {
+        "title1": "Medical background",
+        "title2": "Comprehensive health care",
+        "child1": "specialist medical examination",
+        "child2": "remote medical examination",
+        "child3": "physical exam",
+        "child4": "Medical test",
+        "child5": "specialist medical examination",
+        "child6": "dental examination"    
+    },
+
     "common": {
         "add": "Add",
         "edit": "Edit",

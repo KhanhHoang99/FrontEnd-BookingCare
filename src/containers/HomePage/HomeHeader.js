@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from "react-intl";
+import { LANGUAGES } from '../../utils/constant';
+import { changeLanguageApp } from '../../store/actions/appActions';
 import './HomeHeader.scss';
 
 
 const OPTIONS = [
     {
         icon: <i className="fas fa-hospital"></i>,
-        title: 'Khám chuyên khoa'
+        title: <FormattedMessage id="banner.child1" />
     },
     {
         icon: <i className="fas fa-phone"></i>,
-        title: 'Khám từ xa'
+        title: <FormattedMessage id="banner.child2" />
     },
     {
         icon: <i className="fas fa-stethoscope"></i>,
-        title: 'Khám tổng quát'
+        title: <FormattedMessage id="banner.child3" />
     },
     {
         icon: <i className="fas fa-flask"></i>,
-        title: 'Xét nghiệm y học'
+        title: <FormattedMessage id="banner.child4" />
     },
     {
         icon: <i className="fas fa-hospital"></i>,
-        title: 'Khám chuyên khoa'
+        title: <FormattedMessage id="banner.child1" />
     },
     {
         icon: <i className="fas fa-briefcase-medical"></i>,
-        title: 'Khám nha khoa'
+        title: <FormattedMessage id="banner.child6" />
     },
     
 ];
@@ -36,11 +38,14 @@ const OPTIONS = [
 
 class HomeHeader extends Component {
 
+    changeLanguage = (language) => {
+        // fire redux event : actions
+        this.props.changeLanguageAppRedux(language)
+
+    }
     
     render() {
-        
-        console.log('props: ', this.props)
-
+        let language = this.props.lang;
         return (
             <>
                 <div className='home-header-container container'>
@@ -68,9 +73,22 @@ class HomeHeader extends Component {
                                 </div>
                             </div>
                             <div className='right-content'>
-                                <span><i className="fas fa-question-circle"></i><FormattedMessage id="home-header.support" /></span>
-                                <span className='language-vi'>VN</span>
-                                <span className='language-en'>EN</span>
+                                <span className='support'>
+                                    <i className="fas fa-question-circle"></i>
+                                    <FormattedMessage id="home-header.support" />
+                                </span>
+                                <span 
+                                    className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'} 
+                                    onClick={() => this.changeLanguage(LANGUAGES.VI)}
+                                >
+                                    VN
+                                </span>
+                                <span 
+                                    className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'} 
+                                    onClick={() => this.changeLanguage(LANGUAGES.EN)}
+                                >
+                                    EN
+                                </span>
                             </div>
                         </div>
                 </div>
@@ -117,6 +135,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };
 
