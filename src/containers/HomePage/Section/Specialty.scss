@@ -1,0 +1,87 @@
+
+.wrapper {
+    box-shadow: 3px 11px 5px 9px #888888;
+}
+
+.section-specialty {
+
+    padding: 20px 0;
+    .specialty-content {
+
+        .specialty-header {
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+
+            .specialty-header-title {
+                text-transform: capitalize;
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            button {
+                font-weight: 400;
+                background: #fff;
+                padding: 10px 15px;
+                text-align: center;
+                outline: none;
+                border: none;
+                text-transform: uppercase;
+                font-size: 10px;
+                color: #959595;
+                background-color: #ebebeb;
+
+                &:hover {
+                    background-color: #f7d800;
+                    color: white;
+                }
+            }
+        }
+
+        .section-slider-custom {
+            position: relative;
+
+            button {
+                font-weight: 400;
+                background: #ffffffa3;
+                border: 2px solid #d7d7d7;
+                padding: 10px 15px;
+                text-align: center;
+                color: #959595 !important;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 1;
+            }
+
+            .btn-left {
+                left: -10px;
+            }
+
+            .btn-right {
+                right: -10px;
+            }
+        }
+
+        .specialty-card {
+            padding: 0 5px;
+            .specialty-img {
+                padding-top: 50%;
+                background-image: url('../../../assets/specialty/120331-co-xuong-khop.jpg');
+                background-color: #e0f710;
+                background-position: center; 
+                background-repeat: no-repeat; 
+                background-size: cover; 
+            }
+
+            .specialty-title {
+                padding: 5px 0;
+                color: #959595;
+                &:hover {
+                    color: #45c3d2;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
