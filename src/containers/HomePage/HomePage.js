@@ -6,6 +6,9 @@ import MedicalFacility from './Section/MedicalFacility';
 import Specialty from './Section/Specialty';
 import './HomePage.scss';
 import OutStandingDoctor from './Section/OutStandingDoctor';
+import HandBook from './Section/HandBook';
+import About from './Section/About';
+import HomeFooter from './HomeFooter';
 
 
 const ArrowLeft = ({currentSlide, slideCount, children, ...props}) => (
@@ -41,12 +44,26 @@ class HomePage extends Component {
             prevArrow: <ArrowRight />
           };
 
+          let settings2 = {
+            className: 'section-slider-custom',
+            dots: false,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            nextArrow: <ArrowLeft />,
+            prevArrow: <ArrowRight />
+          };
+
         return (
             <>
                 <HomeHeader />
                 <Specialty settings = {settings}/>
                 <MedicalFacility settings = {settings}/>
                 <OutStandingDoctor settings = {settings}/>
+                <HandBook settings = {settings2}/>
+                <About />
+                <HomeFooter />
             </>
         );
     }

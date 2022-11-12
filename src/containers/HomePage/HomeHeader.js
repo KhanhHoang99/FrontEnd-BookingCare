@@ -48,8 +48,8 @@ class HomeHeader extends Component {
         let language = this.props.lang;
         return (
             <>
-                <div className='home-header-container container'>
-                        <div className='home-header-content'>
+                <div className='home-header-container'>
+                        <div className='home-header-content container'>
                             <div className='left-content'>
                                 <i className="fas fa-bars bar-logo"></i>
                                 <div className='header-logo'></div>
