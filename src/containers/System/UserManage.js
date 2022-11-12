@@ -175,4 +175,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
+    export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
