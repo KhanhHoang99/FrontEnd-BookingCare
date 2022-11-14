@@ -39,5 +39,25 @@
             "manage-handbook": "Quản lý cẩm nang"
 
         }
+    },
+
+    "manage-user": {
+        "add": "Thêm mới người dùng",
+        "password": "Mật khẩu",
+        "first-name": "Tên",
+        "last-name": "Họ",
+        "phone-number": "Số điện thoại",
+        "address": "Địa chỉ",
+        "gender": "Giới tính",
+        "position": "Chức danh",
+        "role": "Vai trò",
+        "save": "Lưu user",
+        "image": "Ảnh đại diện",
+        "choose-gender": "Chọn giới tính",
+        "choose-position": "Chọn chức danh",
+        "choose-role": "Chọn vai trò",
+        "choose-image": "Chọn hình ảnh"
+
+        
     }
 }
