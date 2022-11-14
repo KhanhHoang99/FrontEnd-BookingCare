@@ -38,6 +38,7 @@
                 .menu-link {
                     text-decoration: none;
                     color: $text-in-light;
+
                 }
                 .sub-menu-list {
                     display: none;
@@ -69,7 +70,7 @@
                         }
                     }
                 }
-                &.active span {
+                &.active a {
                     font-weight: 500;
                     color: $colormain;
                 }
