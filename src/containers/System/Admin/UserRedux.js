@@ -4,13 +4,20 @@ import { connect } from 'react-redux';
 import userService from '../../../services/userService';
 import {LANGUAGES} from "../../../utils";
 import * as actions from "../../../store/actions";
+import './UserRedux.scss';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
 class UserRedux extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            genderArr: []
+            genderArr: [],
+            positionArr: [],
+            roleArr: [],
+            previewImgURL: '',
+            isOpenLightBox: false,
 
         }
     }
@@ -27,6 +34,8 @@ class UserRedux extends Component {
         // }
 
         this.props.getGenderStart();
+        this.props.getPositionStart();
+        this.props.getRoleStart();
 
     }
 
@@ -37,18 +46,41 @@ class UserRedux extends Component {
                 genderArr: this.props.genderRedux
             })
         }
+        if (this.props.positions !== prevProps.positions) {
+            this.setState({
+                positionArr: this.props.positions
+            })
+        }
+        if (this.props.roles !== prevProps.roles) {
+            this.setState({
+                roleArr: this.props.roles
+            })
+        }
+      }
+
+      handleOnChangeImage = (e) => {
+        // console.log('event: ', e.target.files[0])
+        const data = e.target.files;
+        const file = data[0];
+        const ObjectUrl = URL.createObjectURL(file);
+        this.setState({previewImgURL: ObjectUrl});
+        // console.log(ObjectUrl)
       }
 
 
     render() {
 
         const gender = this.state.genderArr;
+        const positionArr = this.state.positionArr;
+        const roleArr = this.state.roleArr;
         const language = this.props.language;
+        const isLoadingGender = this.props.isLoadingGender;
         // console.log(gender)
         
         return (
             <div className='user-redux-container'>
                 <div className="title text-center">Manage User with Redux</div>
+                <div className="text-center">{isLoadingGender ? 'Loading' : ''}</div>
                 <div className='user-redux-body'>
                     <div className='container'>
                         <form>
@@ -108,28 +140,58 @@ class UserRedux extends Component {
                                     <label className='my-1' htmlFor="inputState"><FormattedMessage id="manage-user.position" /></label>
                                     <select className="form-select" aria-label="Default select example">
                                         <option defaultValue>{language === LANGUAGES.VI ? "Chọn vị trí" : "Choose position" }</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        {
+                                            positionArr && positionArr.length > 0 
+                                            && positionArr.map((item) => {
+                                                return (
+                                                    <option 
+                                                        key={item.id}
+                                                    >
+                                                        {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                                    </option>
+                                                )
+                                            }) 
+                                        }
                                     </select>
                                 </div>
                                 <div className="form-group col-3">
                                     <label className='my-1' htmlFor="inputState"><FormattedMessage id="manage-user.role" /></label>
                                     <select className="form-select" aria-label="Default select example">
                                         <option defaultValue>{language === LANGUAGES.VI ? "Chọn vai trò" : "Choose role" }</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        {
+                                            roleArr && roleArr.length > 0 
+                                            && roleArr.map((item) => {
+                                                return (
+                                                    <option 
+                                                        key={item.id}
+                                                    >
+                                                        {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                                    </option>
+                                                )
+                                            }) 
+                                        }
                                     </select>
                                 </div>
                                 <div className="form-group col-3">
                                     <label className='my-1' htmlFor="inputState"><FormattedMessage id="manage-user.image" /></label>
-                                    <select className="form-select" aria-label="Default select example">
-                                        <option defaultValue>{language === LANGUAGES.VI ? "Chọn hình ảnh" : "Choose image" }</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    <div className='preview-image-container'>
+                                        <input type='file' id="image" onChange={(e) => this.handleOnChangeImage(e)} hidden/>
+                                        <label className='label-upload' htmlFor='image'>
+                                            Upload Image <i className='fas fa-upload'></i>
+                                        </label>
+                                        <div className='preview-image' onClick={() => this.setState({ isOpenLightBox: true })}>
+                                            {
+                                                this.state.previewImgURL && 
+                                                <img src={this.state.previewImgURL} alt='' title='xem anh'/>
+                                            }
+                                            {this.state.isOpenLightBox && this.state.previewImgURL &&
+                                                <Lightbox
+                                                    mainSrc={this.state.previewImgURL}
+                                                    onCloseRequest={() => this.setState({  isOpenLightBox: false })}
+                                                />
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                                
                             </div>
@@ -148,13 +210,18 @@ class UserRedux extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        genderRedux: state.admin.genders
+        genderRedux: state.admin.genders,
+        isLoadingGender: state.admin.isLoadingGender,
+        positions: state.admin.positions,
+        roles: state.admin.roles,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getGenderStart: () => dispatch(actions.fetchGenderStart())
+        getGenderStart: () => dispatch(actions.fetchGenderStart()),
+        getPositionStart: () => dispatch(actions.fetchPositionStart()),
+        getRoleStart: () => dispatch(actions.fetchRoleStart()),
     };
 };
 
