@@ -43,6 +43,7 @@
 
     "manage-user": {
         "add": "Thêm mới người dùng",
+        "edit": "Sửa người dùng",
         "password": "Mật khẩu",
         "first-name": "Tên",
         "last-name": "Họ",

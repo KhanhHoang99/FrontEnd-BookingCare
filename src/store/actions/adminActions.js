@@ -102,7 +102,7 @@ export const createNewUser = (data) => {
                 dispatch(saveUserSuccess(res.data));
                 dispatch(fetchAllUserStart());
             }else {
-                toast.error("CREATE A USER ERROR");
+                toast.error(res.message);
                 dispatch(saveUserFailed());
             }
         } catch (error) {
@@ -176,4 +176,35 @@ export const deleteUserSuccess = () => ({
 
 export const deleteUserFailed = () => ({
     type: actionTypes.DELETE_USER_FAILED,
+})
+
+
+export const editUser = (user) => {
+    
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await userService.editUserService(user);
+            // console.log('res: ', res)
+            if(res && res.errCode === 0) {
+                toast.success("EDIT USER SUCCESS");
+                dispatch(editUserSuccess(res.data));
+                dispatch(fetchAllUserStart());
+            }else {
+                toast.error("Edit user error: ", res.message);
+                dispatch(editUserFailed());
+            }
+        } catch (error) {
+            console.log('fetch role error', error)
+            dispatch(saveUserFailed());
+        }
+    }
+}
+
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS
+})
+
+export const editUserFailed = () => ({
+    type: actionTypes.EDIT_USER_FAILED
 })
