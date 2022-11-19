@@ -56,6 +56,10 @@
         "choose-position": "Choose position",
         "choose-role": "Choose role",
         "choose-image": "Choose image"
+    },
+    "homepage": {
+        "outstanding-doctor": "Out standing doctor",
+        "more-info": "More info"
     }
 
 }

@@ -31,12 +31,13 @@ const ArrowRight = ({currentSlide, slideCount, children, ...props}) => (
 
 class HomePage extends Component {
 
+
     render() {
         
         let settings = {
             className: 'section-slider-custom',
             dots: false,
-            infinite: true,
+            infinite: false,
             speed: 500,
             slidesToShow: 4,
             slidesToScroll: 1,

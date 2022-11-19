@@ -59,21 +59,21 @@ class UserRedux extends Component {
             let arrGender = this.props.genderRedux;
             this.setState({
                 genderArr: arrGender,
-                gender: arrGender && arrGender.length > 0 ? arrGender[0].key : ''
+                gender: arrGender && arrGender.length > 0 ? arrGender[0].keyMap : ''
             })
         }
         if (this.props.positions !== prevProps.positions) {
             let arrPosition = this.props.positions;
             this.setState({
                 positionArr: arrPosition,
-                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : ''
+                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : ''
             })
         }
         if (this.props.roles !== prevProps.roles) {
             let arrRole = this.props.roles;
             this.setState({
                 roleArr: arrRole,
-                role: arrRole && arrRole.length > 0 ? arrRole[0].key : ''
+                role: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : ''
             })
         }
 
@@ -90,9 +90,9 @@ class UserRedux extends Component {
                 lastName: "",
                 phoneNumber: "",
                 address: "",
-                gender: arrGender && arrGender.length > 0 ? arrGender[0].key : '',
-                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : '',
-                role: arrRole && arrRole.length > 0 ? arrRole[0].key : '',
+                gender: arrGender && arrGender.length > 0 ? arrGender[0].keyMap : '',
+                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : '',
+                role: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : '',
                 avatar: "",
                 
                 action: '',
@@ -239,7 +239,7 @@ class UserRedux extends Component {
                     <div className='container'>
                         <form>
                             <div className="row">
-                                <div><FormattedMessage id="manage-user.add" /> </div>
+                                <div><FormattedMessage id="manage-user.add" /></div>
                                 <div className="form-group col-3">
                                     <label className='my-1' htmlFor="inputEmail4">Email</label>
                                     <input 
@@ -325,7 +325,7 @@ class UserRedux extends Component {
                                                 return (
                                                     <option 
                                                         key={item.id}
-                                                        value={item.key}
+                                                        value={item.keyMap}
                                                     >
                                                         {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
                                                     </option>
@@ -348,7 +348,7 @@ class UserRedux extends Component {
                                                 return (
                                                     <option 
                                                         key={item.id}
-                                                        value={item.key}
+                                                        value={item.keyMap}
                                                     >
                                                         {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
                                                     </option>
@@ -371,7 +371,7 @@ class UserRedux extends Component {
                                                 return (
                                                     <option 
                                                         key={item.id}
-                                                        value={item.key}
+                                                        value={item.keyMap}
                                                     >
                                                         {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
                                                     </option>

@@ -52,6 +52,7 @@
     padding: 20px 0;
     .section-content {
 
+
         .section-header {
             padding: 15px 0;
             display: flex;
@@ -80,8 +81,10 @@
                     color: white;
                 }
             }
+
         }
 
+        
         .section-slider-custom {
             position: relative;
 
@@ -96,7 +99,12 @@
                 top: 50%;
                 transform: translateY(-50%);
                 z-index: 1;
+
+                .slick-disabled {
+                    display: none !important;
+                }
             }
+            
 
             .btn-left {
                 left: -10px;
@@ -123,7 +131,7 @@
                 background-position: center; 
                 background-repeat: no-repeat; 
                 background-size: cover;
-                
+
                 &.bg-specialty {
                     background-image: url('../../assets/specialty/120331-co-xuong-khop.jpg');
 

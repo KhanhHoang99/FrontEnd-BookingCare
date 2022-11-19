@@ -96,7 +96,7 @@ export const createNewUser = (data) => {
         try {
 
             let res = await userService.createNewUser(data);
-            console.log('res: ', res)
+            // console.log('res: ', res)
             if(res && res.errCode === 0) {
                 toast.success("CREATE A USER SUCCESS");
                 dispatch(saveUserSuccess(res.data));
@@ -154,7 +154,7 @@ export const deleteUser = (userId) => {
         try {
 
             let res = await userService.deleteUserService(userId);
-            console.log('res: ', res)
+            
             if(res && res.errCode === 0) {
                 toast.success("DELETE THE USER SUCCESS");
                 dispatch(saveUserSuccess(res.data));
@@ -208,3 +208,27 @@ export const editUserSuccess = () => ({
 export const editUserFailed = () => ({
     type: actionTypes.EDIT_USER_FAILED
 })
+
+export const fetchTopDoctor = () => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await userService.getTopDoctorHomeService('6');
+            if(res && res.errCode === 0){
+                dispatch({
+                    type: actionTypes.FETCH_TOP_DOCTORS_SUCCESS,
+                    dataDoctors: res.data
+                })
+            }else{
+
+                dispatch({
+                    type: actionTypes.FETCH_TOP_DOCTORS_FAILED,
+                })
+            }
+        } catch (error) {
+            console.log("'FETCH_TOP_DOCTORS_FAILED: ", error)
+            dispatch({
+                type: actionTypes.FETCH_TOP_DOCTORS_FAILED,
+            })
+        }
+    }
+}
