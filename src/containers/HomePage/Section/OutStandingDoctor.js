@@ -6,7 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { FormattedMessage } from 'react-intl';
 import * as action from '../../../store/actions';
 import {LANGUAGES} from '../../../utils/constant';
-
+// import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class OutStandingDoctor extends Component {
 
@@ -30,6 +31,10 @@ class OutStandingDoctor extends Component {
     }
     
     
+    handleViewDetailDoctor = (doctor) => {
+        this.props.history.push({ pathname: `/detail-doctor/${doctor.id}`})
+    }
+
     render() {
         let arrDoctors = this.state.arrDoctors;
         arrDoctors = arrDoctors.concat(arrDoctors).concat(arrDoctors)
@@ -58,7 +63,7 @@ class OutStandingDoctor extends Component {
                                         let nameEn = `${doctor.positionData.valueEn} ${doctor.firstName} ${doctor.lastName}`
 
                                         return (
-                                            <div className='section-card' key={doctor.id}>
+                                            <div className='section-card' key={doctor.id} onClick={() => this.handleViewDetailDoctor(doctor)}>
                                                 <div className='section-card-doctor'>
                                                     <div className='section-img bg-specialty avatar'
                                                         style={{backgroundImage: `url(${imageBase64})`}}
@@ -95,4 +100,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);
+export default connect(mapStateToProps, mapDispatchToProps)( withRouter(OutStandingDoctor));

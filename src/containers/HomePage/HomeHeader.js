@@ -92,33 +92,37 @@ class HomeHeader extends Component {
                             </div>
                         </div>
                 </div>
-                <div className='home-header-banner'>
-                    <div className='content-up'>
-                        <h1 className='title'><FormattedMessage id="banner.title1" /><br/><b><FormattedMessage id="banner.title2" /></b></h1>
-                        <div className='search'>
-                            <i className="fas fa-search"></i>
-                            <input 
-                                type='text'
-                                placeholder='Tìm bác sĩ'
-                            />
+                {
+                    this.props.isShowBanner
+                        &&
+                    <div className='home-header-banner'>
+                        <div className='content-up'>
+                            <h1 className='title'><FormattedMessage id="banner.title1" /><br/><b><FormattedMessage id="banner.title2" /></b></h1>
+                            <div className='search'>
+                                <i className="fas fa-search"></i>
+                                <input 
+                                    type='text'
+                                    placeholder='Tìm bác sĩ'
+                                />
+                            </div>
+                        </div>
+                        <div className='content-down'>
+                            <ul className='options'>
+                                {
+                                    OPTIONS && OPTIONS.length > 0 &&
+                                    OPTIONS.map((item, index) => {
+                                        return (
+                                            <li className='option-child' key={`option${index}`}>
+                                                <span className='icon-child'>{item.icon}</span>
+                                                <p className='text-child'>{item.title}</p>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
                         </div>
                     </div>
-                    <div className='content-down'>
-                        <ul className='options'>
-                            {
-                                OPTIONS && OPTIONS.length > 0 &&
-                                OPTIONS.map((item, index) => {
-                                    return (
-                                        <li className='option-child' key={`option${index}`}>
-                                            <span className='icon-child'>{item.icon}</span>
-                                            <p className='text-child'>{item.title}</p>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </div>
-                </div>
+                }
                 
             </>
         );
