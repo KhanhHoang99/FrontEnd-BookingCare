@@ -57,17 +57,19 @@ class DetailDoctor extends Component {
             <>
                 <HomeHeader isShowBanner={false}/>
                 <div className='doctor-detail-container'>
-                    <div className='intro-doctor'>
+                    <div className='intro-doctor container'>
                         <div 
-                            className='content-left'
+                            className='content-left avatar'
                             style={{backgroundImage: `url(${detailDoctor.image})`}}
                         >
 
                         </div>
                         <div className='content-right'>
-                            <div className='up'>
-                                {language === LANGUAGES.VI ? nameVi : nameEn}
-                            </div>
+                            <h2 className='up'>
+                                <strong>
+                                    {language === LANGUAGES.VI ? nameVi : nameEn}
+                                </strong>
+                            </h2>
                             <div className='down'>
                                 {
                                     detailDoctor.Markdown && detailDoctor.Markdown.description && 
@@ -80,10 +82,12 @@ class DetailDoctor extends Component {
 
                     </div>
                     <div className='detail-info-doctor'>
-                        {
-                            detailDoctor.Markdown && detailDoctor.Markdown.contentHTML &&
-                            <div dangerouslySetInnerHTML={{__html: detailDoctor.Markdown.contentHTML}}></div>
-                        }
+                        <div className='container'>
+                            {
+                                detailDoctor.Markdown && detailDoctor.Markdown.contentHTML &&
+                                <div dangerouslySetInnerHTML={{__html: detailDoctor.Markdown.contentHTML}}></div>
+                            }
+                        </div>
                     </div>
                     <div className='comment-doctor'>
 
