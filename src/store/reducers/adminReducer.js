@@ -9,7 +9,8 @@ const initialState = {
    users: [],
    isLoadingGender: false,
    topDoctors: [],
-   allDoctors: []
+   allDoctors: [],
+   allScheduleTime: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -108,6 +109,21 @@ const adminReducer = (state = initialState, action) => {
         }
 
         case actionTypes.SAVE_DETAIL_DOCTOR_FAILED: {
+            return {
+                ...copyState,
+            }
+        }
+
+        case actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_SUCCESS: {
+            
+            copyState.allScheduleTime = action.dataTime
+
+            return {
+                ...copyState,
+            }
+        }
+
+        case actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED: {
             return {
                 ...copyState,
             }
