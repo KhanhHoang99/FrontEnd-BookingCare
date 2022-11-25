@@ -85,6 +85,10 @@ class ManageSchedule extends Component {
             currentDate: date[0]
         })
         // console.log('date: ', date)
+
+        // let formateDate = moment(date[0]).unix();
+
+        // console.log('formateDate : ', formateDate)
     }
 
     handleClickBtnTime = (time) => {
@@ -103,7 +107,7 @@ class ManageSchedule extends Component {
         })
     }
 
-    handleSaveSchedule = () => {
+    handleSaveSchedule = async () => {
         let { rangeTime, selectedDoctor, currentDate} = this.state;
         let result = [];
 
@@ -116,7 +120,10 @@ class ManageSchedule extends Component {
             return;
         }
 
-        let formateDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        // let formateDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        // let formateDate = moment(currentDate).unix();
+        let formateDate =  new Date(currentDate).getTime();
+
 
         if(rangeTime && rangeTime.length > 0) {
 
@@ -128,7 +135,7 @@ class ManageSchedule extends Component {
                     let object = {};
                     object.doctorId = selectedDoctor.value;
                     object.date = formateDate;
-                    object.time = time.keyMap;
+                    object.timeType = time.keyMap;
                     return object;
                 })
             }else {
@@ -136,7 +143,12 @@ class ManageSchedule extends Component {
                 return;
             }
 
-            console.log('result: ', result)
+            let res = await userService.saveBulkScheduleDoctor({
+                arrSchedule: result,
+                doctorId: selectedDoctor.value,
+                date: formateDate
+            })
+            console.log('res: ', res)
 
         }
 
