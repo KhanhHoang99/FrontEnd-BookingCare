@@ -76,6 +76,15 @@
             "schedule": "Schedule",
             "no-schedule": "There are no appointments during this time, please choose another time"
         }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Create more doctor's information",
+            "select-doctor": "Select doctor",
+            "intro": "Intro",
+            "add": "Add info",
+            "save": "Save info"
+        }
     }
 
 }

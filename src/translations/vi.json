@@ -81,5 +81,14 @@
             "schedule": "Lịch khám",
             "no-schedule": "Không có lịch hẹn trong thời gian này vui lòng chọn thời gian khác"
         }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Tạo thêm thông tin bác sĩ",
+            "select-doctor": "Chọn bác sĩ",
+            "intro": "Thông tin giới thiệu",
+            "add": "Tạo thông tin",
+            "save": "Lưu thông tin"
+        }
     }
 }

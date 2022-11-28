@@ -10,7 +10,9 @@ const initialState = {
    isLoadingGender: false,
    topDoctors: [],
    allDoctors: [],
-   allScheduleTime: []
+   allScheduleTime: [],
+   allRequiredDoctorInfor: [],
+
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -128,7 +130,20 @@ const adminReducer = (state = initialState, action) => {
                 ...copyState,
             }
         }
-            
+
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_SUCCESS: {
+            copyState.allRequiredDoctorInfor = action.data
+            return {
+                ...copyState,
+            }
+        }
+
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_FAILED: {
+            return {
+                ...copyState,
+            }
+        }
+        
         default:
             return state;
     }
