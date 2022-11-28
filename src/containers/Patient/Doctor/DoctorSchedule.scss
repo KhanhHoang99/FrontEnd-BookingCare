@@ -1,6 +1,45 @@
 
 .doctor-schedule-container {
-    height: 200px;
-    border: 1px solid red;
+    border-right: 1px solid rgba(51, 51, 51, 0.151);
+    padding-bottom: 15px;
+    
+    .all-shcedule {
+    
+    }
+    
+    .all-available-time {
+        
+        .text-calendar {
+            
+            font-size: 15px;
+            font-weight: 600;
+            margin: 10px 0;
+
+            i {
+                margin-right: 5px;
+            }
+        }
+
+        .time-content {
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            button {
+                padding: 10px 15px;
+                color: #333;
+                font-weight: 600;
+                border: 2px solid transparent;
+                outline: none;
+                background: #fff04b;
+
+                &:hover {
+                    border: 2px solid #45c3d2;
+                }
+            }
+        }
+
+    }
 
 }

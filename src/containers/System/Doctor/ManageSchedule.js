@@ -146,9 +146,15 @@ class ManageSchedule extends Component {
             let res = await userService.saveBulkScheduleDoctor({
                 arrSchedule: result,
                 doctorId: selectedDoctor.value,
-                date: formateDate
+                date: formateDate.toString()
             })
             console.log('res: ', res)
+
+            if(res && res.errCode === 0) {
+                toast.success('save success');
+            }else {
+                toast.error('save error');
+            }
 
         }
 
@@ -159,7 +165,7 @@ class ManageSchedule extends Component {
         const {  isLoggedIn, language } = this.props;
         const { selectedDoctor, listDoctors, rangeTime } = this.state;
         const options = this.buildDataInputSelect(listDoctors);
-        
+        let yesterday = new Date(new Date().setDate(new Date().getDate()-1));
          
         return (
             <div className='manage-schedule-container'>
@@ -183,7 +189,7 @@ class ManageSchedule extends Component {
                                 onChange={this.handleOnchaneDatePicker}
                                 className='form-control'
                                 defaulValue={this.state.currentDate}
-                                minDate={new Date()}
+                                minDate={yesterday}
                             />
                         </div>
                         <div className='col-12 pick-hour-container'>
