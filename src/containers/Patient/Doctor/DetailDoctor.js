@@ -5,6 +5,7 @@ import userService from '../../../services/userService';
 import './DetailDoctor.scss';
 import { LANGUAGES } from '../../../utils/constant';
 import DoctorSchedule from './DoctorSchedule';
+import DoctorExtraInfor from './DoctorExtraInfor';
 
 
 
@@ -86,7 +87,9 @@ class DetailDoctor extends Component {
                         <div className='content-left'>
                             <DoctorSchedule idFromParent = {this.state.idFromParent}/>
                         </div>
-                        <div className='content-right'></div>
+                        <div className='content-right'>
+                            <DoctorExtraInfor idFromParent = {this.state.idFromParent}/>
+                        </div>
                     </div>
                     <div className='detail-info-doctor'>
                         <div className='container'>

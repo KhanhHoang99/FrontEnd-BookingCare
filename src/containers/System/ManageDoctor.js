@@ -38,7 +38,7 @@ class ManageDoctor extends Component {
             selectedProvince: null,
             nameClinic: '',
             addressClinic: '',
-            note: ''
+            note: '',
         }
     }
     
@@ -124,20 +124,70 @@ class ManageDoctor extends Component {
     handleChangeSelect = async (selectedDoctor) => {
         this.setState({ selectedDoctor });
 
+        let { listPayment, listPrice, listProvince} = this.state;
+
         let res =  await userService.getDetailInfoDoctor(selectedDoctor.value);
         if(res && res.errCode === 0 && res.data && res.data.Markdown){
             let Markdown = res.data.Markdown;
+            
+            let addressClinic = '', nameClinic = '', note = '', paymentId = '', priceId = '', provinceId = '',
+            selectedPayment = '', selectedPrice = '', selectedProvince = '';
+;
+
+            if(res.data.Doctor_Infor) {
+
+                addressClinic = res.data.Doctor_Infor.addressClinic;
+                nameClinic = res.data.Doctor_Infor.nameClinic;
+                note = res.data.Doctor_Infor.note;
+
+                paymentId = res.data.Doctor_Infor.paymentId;
+                priceId = res.data.Doctor_Infor.priceId;
+                provinceId = res.data.Doctor_Infor.provinceId;
+
+                selectedPayment = listPayment.find(item => {
+                    if(item.value === paymentId) {
+                        return item
+                    }
+                })
+
+                selectedPrice = listPrice.find(item => {
+                    if(item.value === priceId) {
+                        return item
+                    }
+                })
+
+                selectedProvince = listProvince.find(item => {
+                    if(item.value === provinceId) {
+                        return item
+                    }
+                })
+    
+            }
+
             this.setState({
                 contentMarkdown: Markdown.contentMarkdown,
                 contentHTML: Markdown.contentHTML,
                 description: Markdown.description,
-                hasOldData: true
+                hasOldData: true,
+                addressClinic: addressClinic,
+                nameClinic: nameClinic,
+                note: note,
+                selectedPayment: selectedPayment,
+                selectedPrice: selectedPrice,
+                selectedProvince: selectedProvince
+               
             })
         }else{
             this.setState({
                 contentMarkdown: '',
                 contentHTML: '',
                 description: '',
+                addressClinic: '',
+                nameClinic: '',
+                note: '',
+                selectedPayment: '',
+                selectedPrice: '',
+                selectedProvince: '',
                 hasOldData: false
             })
         }
@@ -145,6 +195,8 @@ class ManageDoctor extends Component {
       };
     
     handleChangeSelectDoctorInfor = async (selectOption, name) => {
+
+        // console.log('selectOption: ', selectOption)
         
         let stateName = name.name;
         let stateCopy = {...this.state};
@@ -187,7 +239,7 @@ class ManageDoctor extends Component {
                     let labelVi = `${item.valueVi} VND` ;
                     let labelEn =  `${item.valueEn} USD`;
                     Object.label = language === LANGUAGES.VI ? labelVi : labelEn;
-                    Object.value = item.id;
+                    Object.value = item.keyMap;
                     result.push(Object)
                 })
             }else {
@@ -197,7 +249,7 @@ class ManageDoctor extends Component {
                     let labelVi = `${item.valueVi}`;
                     let labelEn =  `${item.valueEn}`;
                     Object.label = language === LANGUAGES.VI ? labelVi : labelEn;
-                    Object.value = item.id;
+                    Object.value = item.keyMap;
                     result.push(Object)
                 })
             }
