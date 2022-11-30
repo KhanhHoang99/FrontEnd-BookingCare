@@ -74,7 +74,12 @@
     "patient": {
         "detail-doctor": {
             "schedule": "Schedule",
-            "no-schedule": "There are no appointments during this time, please choose another time"
+            "no-schedule": "There are no appointments during this time, please choose another time",
+            "clinic-address": "clinic address",
+            "examination-price": "examination price",
+            "payment": "The patient can pay the cost by",
+            "show-detail": "Show detail",
+            "hide-table": "hide price table"
         }
     },
     "admin": {

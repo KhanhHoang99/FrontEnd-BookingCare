@@ -79,7 +79,12 @@
     "patient": {
         "detail-doctor": {
             "schedule": "Lịch khám",
-            "no-schedule": "Không có lịch hẹn trong thời gian này vui lòng chọn thời gian khác"
+            "no-schedule": "Không có lịch hẹn trong thời gian này vui lòng chọn thời gian khác",
+            "clinic-address": "địa chỉ khám",
+            "examination-price": "giá khám",
+            "payment": "Người bệnh có thể thanh toán chi phí bằng hình thức",
+            "show-detail": "Xem chi tiết",
+            "hide-table": "Ẩn bảng giá"
         }
     },
     "admin": {
