@@ -1,0 +1,38 @@
+
+ .intro-doctor {
+
+    display: flex;
+    .content-left {
+        width: 120px;
+        height: 120px;
+        background-color: #eebc19e5;
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+        border-radius: 50%;
+        margin: 10px 20px;
+    }
+
+    .content-right {
+        width: 80%;
+    }
+
+}
+
+
+.schedule-doctor {
+    display: flex;
+    .content-left {
+        width: 50%;
+    }
+
+    .content-right {
+        width: 50%;
+    }
+}
+
+.detail-info-doctor {
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+    padding-top: 15px;
+}
