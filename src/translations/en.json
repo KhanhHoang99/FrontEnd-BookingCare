@@ -80,6 +80,20 @@
             "payment": "The patient can pay the cost by",
             "show-detail": "Show detail",
             "hide-table": "hide price table"
+        },
+        "booking-modal": {
+            "title": "Information to book a medical appointment",
+            "fullName": "Full name",
+            "phoneNumber": "Phone number",
+            "email": "Email",
+            "address": "Address",
+            "reason": "Medical examination reason",
+            "birthday": "Birthday",
+            "sex": "Sex",
+            "btn-confirm": "Confirm",
+            "btn-cancel": "Cancel",
+            "priceBooking": "Free booking",
+            "price": "Price"
         }
     },
     "admin": {
