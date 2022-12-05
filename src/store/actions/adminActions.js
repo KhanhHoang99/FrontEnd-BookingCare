@@ -261,7 +261,7 @@ export const saveDetailDoctor = (data) => {
     return async (dispatch, getState) => {
         try {
 
-            console.log(data)
+            // console.log(data)
 
             const res = await userService.saveDetailDoctor(data);
             if(res && res.errCode === 0){
@@ -316,16 +316,19 @@ export const getAllRequiredDoctorInfor = () => {
             const resPrice = await userService.getAllCodeService('PRICE');
             const resPayment = await userService.getAllCodeService('PAYMENT');
             const resProvince = await userService.getAllCodeService('PROVINCE');
+            const resSpecialty = await userService.getAllSpecialty();
 
             if(
                 resPrice && resPrice.errCode === 0 && 
                 resPayment && resPayment.errCode === 0 &&
-                resProvince && resProvince.errCode === 0
+                resProvince && resProvince.errCode === 0 &&
+                resSpecialty && resSpecialty.errCode === 0
             ){
                 let data = { 
                             resPrice: resPrice.data,
                             resPayment: resPayment.data,
-                            resProvince: resProvince.data
+                            resProvince: resProvince.data,
+                            resSpecialty: resSpecialty.data
                         }
                 dispatch(fetchRequiredDoctorInforSuccess(data))
             }else{
