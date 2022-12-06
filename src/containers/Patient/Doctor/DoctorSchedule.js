@@ -72,11 +72,21 @@ class DoctorSchedule extends Component {
         // console.log('Moment vi: ', moment(new Date()).format('dddd - DD/MM'));
         // console.log('Moment en: ', moment(new Date()).locale('en').format('dddd - DD/MM'));
 
-       let allDays =  this.getAllDays(this.props.language);
+        let allDays =  this.getAllDays(this.props.language);
+        const doctorId = this.props.idFromParent;
+        if(doctorId) {
+            const res = await userService.getScheduleDoctorByDate(doctorId, allDays[0].value);
+    
+            if(res && res.errCode === 0 ) {
+                let data = res.data;
+                this.setState({
+                    allAvalableTime: data || [],
+                    selectedOption: allDays[0]
+                })
+            }
 
-       if(allDays && allDays.length > 0) {
+        }
 
-       }
 
        this.setState({
             allDays : allDays

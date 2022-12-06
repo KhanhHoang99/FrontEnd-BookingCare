@@ -17,8 +17,19 @@
         width: 80%;
     }
 
+    
 }
 
+.view-detail-doctor {
+    color: #45c3d2;
+    cursor: pointer;
+    a {
+        text-decoration: none;
+    }
+    &:hover {
+        text-decoration: underline;
+    }
+}
 
 .schedule-doctor {
     display: flex;
