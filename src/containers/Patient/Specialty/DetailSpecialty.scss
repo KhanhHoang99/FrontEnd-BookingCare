@@ -2,7 +2,8 @@
 .detail-specialty-container {
     .des-specialty {
         border: 1px solid red;
-        height: 200px;
+        min-height: 100px;
+        margin: 15px 0;
     }
 
     .each-doctor {
