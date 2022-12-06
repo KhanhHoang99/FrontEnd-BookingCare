@@ -1,0 +1,25 @@
+
+.detail-specialty-container {
+    .des-specialty {
+        border: 1px solid red;
+        height: 200px;
+    }
+
+    .each-doctor {
+        min-height: 200px;
+        background-color: #fff;
+        box-shadow: 0 1px 6px rgba(42, 43, 46, 0.28);
+        border-radius: 8px;
+        margin: 18px 0;
+        display: flex;
+        width: 100%;
+        .dt-content-left {
+            width: 50%;
+        }
+
+        .dt-content-right {
+            width: 50%;
+            padding: 7px;
+        }
+    }
+}
