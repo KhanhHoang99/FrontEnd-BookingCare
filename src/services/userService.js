@@ -81,6 +81,14 @@ const createNewClinic = (data) => {
     return axios.post(`/api/create-new-clinic`, data)
 }
 
+const getAllClinic = () => {
+    return axios.get(`/api/get-clinic`)
+}
+
+const getAllDetailClinicById = (clinicId) => {
+    return axios.get(`/api/get-detail-clinic-by-id?id=${clinicId}`)
+}
+
 export default {
     handleLoginAPI, 
     getAllUsers, 
@@ -101,6 +109,8 @@ export default {
     createNewSpecialty,
     getAllSpecialty,
     getAllDetailSpecialtyById,
-    createNewClinic
+    createNewClinic,
+    getAllClinic,
+    getAllDetailClinicById
 
 }

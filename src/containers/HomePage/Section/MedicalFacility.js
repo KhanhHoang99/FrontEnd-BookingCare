@@ -3,16 +3,43 @@ import { connect } from 'react-redux';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import userService from '../../../services/userService';
+import { withRouter } from 'react-router-dom';
+
 
 
 
 
 class MedicalFacility extends Component {
 
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+           dataClinics : []
+        }
+    }
+
+    async componentDidMount() {
+        const res = await userService.getAllClinic();
+
+        if(res && res.errCode === 0) {
+            this.setState({
+                dataClinics: res.data || []
+            })
+        }
+    }
+
+    handlleViewDetailClinic = (clinic) => {
+        // console.log('click: ', clinic)
+        if(this.props.history){
+            this.props.history.push({ pathname: `/detail-clinic/${clinic.id}`})
+        }
+    }
 
     render() {
         
+        const {dataClinics} = this.state;
+        // console.log(dataClinics);
 
         return (
             <div className='wrapper bg-gray'>
@@ -24,30 +51,24 @@ class MedicalFacility extends Component {
                         </div>
                         <div className='section-body'>
                             <Slider {...this.props.settings}>
-                                <div className='section-card'>
-                                    <div className='section-img bg-medical'/>
-                                    <p className='section-title'>Bệnh viện chợ rẫy 1</p>
-                                </div>
-                                <div className='section-card'>
-                                    <div className='section-img bg-medical'/>
-                                    <p className='section-title'>Bệnh viện chợ rẫy 2</p>
-                                </div>
-                                <div className='section-card'>
-                                    <div className='section-img bg-medical'/>
-                                    <p className='section-title'>Bệnh viện chợ rẫy 3</p>
-                                </div>
-                                <div className='section-card'>
-                                    <div className='section-img bg-medical'/>
-                                    <p className='section-title'>Bệnh viện chợ rẫy 4</p>
-                                </div>
-                                <div className='section-card'>
-                                    <div className='section-img bg-medical'/>
-                                    <p className='section-title'>Bệnh viện chợ rẫy 5</p>
-                                </div>
-                                <div className='section-card'>
-                                    <div className='section-img bg-medical'/>
-                                    <p className='section-title'>Bệnh viện chợ rẫy 6</p>
-                                </div>
+                                {
+                                    dataClinics && dataClinics.length > 0 && 
+                                    dataClinics.map((item)=> {
+                                        return (
+                                            <div 
+                                                className='section-card' 
+                                                key={item.id}
+                                                onClick={() => this.handlleViewDetailClinic(item)}
+                                            >
+                                                <div 
+                                                    className='section-img bg-medical'
+                                                    style={{backgroundImage: `url(${item.image})`}}
+                                                />
+                                                <p className='section-title'>{item.name}</p>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </Slider>
                         </div>
                     </div>
@@ -69,4 +90,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MedicalFacility));

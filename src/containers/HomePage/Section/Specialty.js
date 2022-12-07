@@ -36,7 +36,7 @@ class Specialty extends Component {
     render() {
         
         const {dataSpecialty} = this.state;
-        console.log(dataSpecialty)
+        // console.log(dataSpecialty)
 
 
 
