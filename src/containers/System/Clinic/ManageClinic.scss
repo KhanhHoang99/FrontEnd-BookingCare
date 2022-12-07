@@ -1,0 +1,39 @@
+
+.manage-doctor-container {
+
+    text-align: center;
+
+    .manage-doctor-title {
+        padding: 15px;
+        font-size: 30px;
+        text-align: center;
+        text-transform: capitalize;
+        font-weight: 600;
+    }
+
+    .manage-doctor-editor {
+
+    }
+
+    .more-info {
+        display: flex;
+        padding-bottom: 15px;
+        gap: 15px;
+
+        .content-left {
+            width: 40%;
+        }
+
+        .content-right {
+            width: 60%;
+        }
+    }
+
+    .save-content-doctor {
+        padding: 6px;
+        border: none;
+        outline: none;
+        background-color: rgba(255, 208, 0, 0.856);
+        margin-top: 20px;
+    }
+}
