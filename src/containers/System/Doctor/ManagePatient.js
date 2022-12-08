@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './ManagePatient.scss';
 import DatePicker from '../../../components/Input/DatePicker'
-
+import userService from '../../../services/userService';
+import moment from 'moment';
 
 
 
@@ -12,12 +13,32 @@ class ManagePatient extends Component {
         super(props);
         
         this.state = {
-            currentDate: new Date(),
+            currentDate:  moment(new Date()).startOf('day').valueOf(),
+            dataPatient: {}
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let {user} = this.props;
+        let {currentDate}  = this.state;
+        let formatedDate = new Date(currentDate).getTime();
+
+        this.getDataPatient(user, formatedDate)
+
+    }
+    
+    getDataPatient = async (user, formatedDate) => {
+        let res = await userService.getAllPatientForDoctor({
+            doctorId: user.id,
+            date: formatedDate
+        })
         
+        if(res && res.errCode === 0) {
+            this.setState({
+                dataPatient: res.data
+            })
+        }
+
     }
     
     componentDidUpdate(prev) {
@@ -28,13 +49,20 @@ class ManagePatient extends Component {
         console.log(date[0])
         this.setState({
             currentDate: date[0]
+        }, () => {
+            let {user} = this.props;
+            let {currentDate}  = this.state;
+            let formatedDate = new Date(currentDate).getTime();
+    
+            this.getDataPatient(user, formatedDate)
         })
         
     }
 
     render() {
        
-        
+        const {dataPatient} = this.state;
+
          
         return (
             <div className='manage-patient-container container'>
@@ -54,19 +82,31 @@ class ManagePatient extends Component {
                         <table className="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th> 
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Giới Tính</th>
+                                    <th scope="col">Thời Gian</th>
+                                    <th scope="col">Hành Động</th> 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
+                                {
+                                    dataPatient && dataPatient.length > 0 &&
+                                    dataPatient.map((item) => {
+                                        console.log(item)
+                                        return (
+
+                                            <tr key={item.id}>
+                                                <td>{item.patientData.firstName}</td>
+                                                <td>{item.patientData.genderData.valueVi}</td>
+                                                <td>{item.timeTypeDataPatient.valueVi}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success mx-2">Xác Nhận Khám</button>
+                                                    <button type="button" class="btn btn-primary">Gửi Hóa Đơn</button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -78,7 +118,8 @@ class ManagePatient extends Component {
 
 const mapStateToProps = state => {
     return {
-        
+        language: state.app.language,
+        user: state.user.userInfo,
     };
 };
 
